@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+    mongo:
+          image: mongo
+          container_name: mongo
+          restart: always
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+          ports:
+            - 27017:27017
+    order-service:
+          image: order-service
+          container_name: order-service
+          ports:
+            - 8080:8080
+            - 6566:6566
+          depends_on:
+            - mongo  
+    product:
+          image: product-service
+          container_name: product-service
+          depends_on:
+            - order-service
