@@ -16,9 +16,12 @@ services:
             - 8080:8080
             - 6566:6566
           depends_on:
-            - mongo  
+            - mongo
     product:
           image: product-service
           container_name: product-service
+          ports:
+            - 8081:8081
           depends_on:
             - order-service
+
