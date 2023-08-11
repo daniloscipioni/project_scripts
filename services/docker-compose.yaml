@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 services:
     mongo:
           image: mongo
@@ -9,6 +9,8 @@ services:
             MONGO_INITDB_ROOT_PASSWORD: example
           ports:
             - 27017:27017
+          networks:
+            - common-network
     order-service:
           image: order-service
           container_name: order-service
@@ -17,6 +19,8 @@ services:
             - 6566:6566
           depends_on:
             - mongo
+          networks:
+            - common-network
     product:
           image: product-service
           container_name: product-service
@@ -25,4 +29,11 @@ services:
             - 6567:6567
           depends_on:
             - order-service
+          networks:
+            - common-network
+networks:
+  common-network:
+    name: kafka_broker-kafka
+    external: true
+      
 
