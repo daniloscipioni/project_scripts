@@ -7,6 +7,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zookeeper:/data/zk
   
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -23,7 +25,10 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-  
+    volumes:
+      - kafka:/data/kfk
+    command: sh -c "((sleep 15 && kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic orders --replication-factor 1 --partitions 1)&) && /etc/confluent/docker/run ">
+
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
     networks:
@@ -34,6 +39,9 @@ services:
       - 19000:9000
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
+volumes:
+  zookeeper:
+  kafka:
 networks:
   broker-kafka:
     driver: bridge

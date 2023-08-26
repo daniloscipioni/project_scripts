@@ -9,6 +9,8 @@ services:
             MONGO_INITDB_ROOT_PASSWORD: example
           ports:
             - 27017:27017
+          volumes:
+            - mongodata:/data/db
           networks:
             - common-network
     order-service:
@@ -31,9 +33,17 @@ services:
             - order-service
           networks:
             - common-network
+    notification:
+          image: notification-service
+          container_name: notification-service
+          depends_on:
+            - order-service
+          networks:
+            - common-network
+            
+volumes:
+  mongodata:
 networks:
   common-network:
     name: kafka_broker-kafka
     external: true
-      
-
