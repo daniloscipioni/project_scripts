@@ -1,9 +1,5 @@
 version: '3.5'
 
-networks:
-  monitoring:
-    driver: bridge
-
 volumes:
   prometheus_data: {}
 
@@ -26,7 +22,7 @@ services:
     expose:
       - 9100
     networks:
-      - monitoring
+      - common-network
 
   prometheus:
     image: prom/prometheus:latest
@@ -46,8 +42,8 @@ services:
     expose:
       - 9090
     networks:
-      - monitoring
-    
+      - common-network
+   
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -64,4 +60,9 @@ services:
     volumes:
       - '$PWD/data:/var/lib/grafana'
     networks:
-      - monitoring
+      - common-network
+
+networks:
+    common-network:
+      name: kafka_broker-kafka
+      external: true
