@@ -19,7 +19,7 @@ services:
           ports:
             - 8080:8080
             - 6566:6566
-            - 9323:9323
+            - 5555:5555
           depends_on:
             - mongo
           networks:
