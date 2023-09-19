@@ -31,4 +31,4 @@ scrape_configs:
          # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['order-service:9323']
+      - targets: ['order-service:5555','node-exporter:9100']
