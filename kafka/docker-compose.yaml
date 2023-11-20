@@ -27,7 +27,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
       - kafka:/data/kfk
-    command: sh -c "((sleep 15 && kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic orders --replication-factor 1 --partitions 1)&) && /etc/confluent/docker/run ">
+    #command: sh -c "((sleep 15 && kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic orders --replication-factor 1 --partitions 1)&) && /etc/confluent/docker/run ">
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
