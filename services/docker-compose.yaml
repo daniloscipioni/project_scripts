@@ -41,17 +41,17 @@ services:
             - order-service
           networks:
             - common-network
-    app-store:
-          image: app-store
-          container_name: app-store
-          ports:
-            - 3000:3000
-          depends_on:
-            - mongo
-            - order-service
-            - product
-          networks:
-            - common-network
+    # app-store:
+    #       image: app-store
+    #       container_name: app-store
+    #       ports:
+    #         - 3000:3000
+    #       depends_on:
+    #         - mongo
+    #         - order-service
+    #         - product
+    #       networks:
+    #         - common-network
             
 volumes:
   mongodata:
