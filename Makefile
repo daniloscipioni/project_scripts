@@ -7,10 +7,10 @@ kafka-container-up:
 	echo "Waiting for 15 seconds until stabilish registry..." && sleep 15
 
 kafka-container-down:
-	cd \kafka && docker-compose down
+	cd \kafka && docker-compose down 
 
 services-container-up:
 	cd \services && docker-compose up -d
 
 services-container-down:
-	cd \services && docker-compose down
+	cd \services && docker-compose down --remove-orphans
